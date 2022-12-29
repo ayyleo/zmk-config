@@ -10,13 +10,17 @@
 
 // Layer definitions
     #define BASE 0
-    #define SYM 1
+    #define NAV 1
     #define EXT 2
     #define FNC 3
     #define SYM2 4
     #define ACCENT 5
 	#define SETTINGS 6
 // -----------------
+
+// Home row mods macro
+#define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
+#define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
 
 &mt {
    //  flavor = "tap-preferred";
@@ -28,6 +32,18 @@
 };
 
 / {
+    behaviors {
+        ht: hold_tap {
+            label = "hold_tap";
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <220>;
+            quick-tap-ms = <150>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+        };
+    };
 		macros {
 				// sometimes my device thinks a modifier is being held down
 				// pressing all modifiers fixes it.
@@ -67,21 +83,37 @@
 
         // Base alpha layer
        		default_layer {
-		bindings = <
-		&kp Q &kp W &kp E &kp R &kp T           &kp Y &kp U  &kp I     &kp O   &kp P 
-		&kp A &kp S &kp D &kp F &kp G           &kp H &kp J  &kp K     &kp L   &kp SEMICOLON
-		&kp Z &kp X &kp C &kp V &kp B           &kp N &kp M  &kp COMMA &kp DOT &kp SLASH
-					&mo EXT &kp LSHIFT			&kp SPACE &sl SYM
-		>;
+		            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│  J       │  C       │  Y       │  F       │  K       │   │  Z       │  L       │  , <     │  U       │  Q       │
+            &kp J      &kp C      &kp Y      &kp F      &kp K          &kp Z      &kp L      &kp COMMA  &kp U      &kp Q
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│  R       │  S       │  T       │  H       │  D       │   │  M       │  N       │  A       │  I       │   O      │
+            HRML(R,        S,         T,         H)     &kp D          &kp M      HRMR(N,        A,         I,          O)
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ / ?      │  V       │  G       │  P       │  B       │   │  X       │  W       │ . >      │ ; :      │ - _      │
+            &kp FSLH     &kp V      &kp G      &kp P      &kp B          &kp X      &kp W      &kp DOT  &kp SEMI   &kp MINUS
+        //╰──────────┴──────────┼──────────┼──────────┴──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                               &kp E    &kp ENTER 	  &ht INS SPACE &ht DEL BSPC
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
 		};
 
         // Numbers and high frequency symbols
-       		sym_layer {
+       		nav_layer {
 		bindings = <
-		&kp EXCL  &kp AT    &kp POUND   &kp DLLR   &kp PRCNT			&kp CARET    &kp AMPS &kp ASTRK &kp LPAR  &kp RPAR
-		&none &kp GRAVE &kp APOS &kp LBRC &kp LBKT          	&kp UNDER &kp MINUS  &kp PLUS &kp EQUAL &kp COLON
-		&none &kp TILDE &kp DQT  &kp RBRC &kp RBKT				&kp PIPE  &kp BSLH   &kp LT   &kp GT    &kp QMARK
-								  &mo EXT &kp LSHIFT			&kp SPACE &sl SYM
+        //╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮   ╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮
+        //│ 1 !           │ 2 @           │ 3 #           │ 4 $           │  5 %          │   │  6 ^          │  7 &          │  8 *          │  9 (          │  0 )          │
+		   &kp N1           &kp N2   		  &kp N3 		    &kp N4      &kp N5		  		&kp N6 		    &kp N7  		   &kp N8 	    &kp N9   		  &kp N0
+        //├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤   ├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+        //│  \ |          │  ` ~          │  ' "          │  { [          │  } ]          │   │  TAB          │  LEFT         │  UP           │  RIGHT        │print scrn     │
+            HRML(BSLH,      GRAVE,          SQT,             LBKT)             &kp RBKT          &kp TAB        HRMR(LEFT,        UP,            RIGHT,           PSCRN      
+        //├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤   ├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+        //│               │               │               │               │               │   │               │               │               │               │               │
+           &kp K_VOL_DN     &kp K_VOL_UP    &kp K_MUTE      &kp PC_BRI_UP   &kp BC_BRI_DN        &kp K_CALC        &none            &none         &none         &none
+        //╰───────────────┴───────────────┼───────────────┼───────────────┴───────────────┤   ├───────────────┼───────────────┼───────────────┴───────────────┴───────────────╯
+                                                               &none         &kp  ENTER 		&ht INS SPACE   &ht DEL BSPC
+        //                                                ╰───────────────┴───────────────╯   ╰───────────────┴───────────────╯
 		>;
 		};
 
