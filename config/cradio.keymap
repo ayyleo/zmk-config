@@ -82,14 +82,13 @@
         fnc_layer {
 		bindings = <
        
-	    &kp LC(Z)       &kp LC(X)  &kp LC(C)	    &kp LC(V)      &kp LC(Y)		&kp F1 		 &kp F2         &kp F3 	    &kp F4   		  &kp F5
+	    &kp LC(Z)       &kp LC(X)  &kp LC(C)	    &kp LC(V)      &kp LC(Y)		&kp F1 		 &kp F2        &kp F3 	    &kp F4   	  &kp F5
        
-            HRML(trans,      trans,          trans,             trans)           &kp CAPS          &kp F6        HRMR(F7,        F8,                F9,           F10)      
+            &none           &none      &none                 &none         &kp CAPS             &kp F6           &kp F7        &kp F8       &kp F9        &kp F10      
        
-           &kp K_VOL_DN     &kp K_VOL_UP    &kp K_MUTE      &kp PC_BRI_UP   &kp PC_BRI_DN        &kp F11        &none            &none            &none         &kp F12
+           &kp K_VOL_DN     &kp K_VOL_UP    &kp K_MUTE      &kp PC_BRI_UP   &kp PC_BRI_DN        &kp F11        &none          &none        &none         &kp F12
        
-                                                               &none         &kp  ENTER        &ht INS SPACE   &ht DEL BSPC
-        //                                               
+                                                               &none         &kp  ENTER        &ht INS SPACE   &ht DEL BSPC                                               
 		>;
         };
 
