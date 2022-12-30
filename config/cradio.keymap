@@ -74,22 +74,26 @@
         //│ / ?      │  V       │  G       │  P       │  B       │   │  X       │  W       │ . >      │ ; :      │ - _      │
             &kp FSLH     &kp V      &kp G      &kp P      &kp B          &kp X      &kp W      &kp DOT  &kp SEMI   &kp MINUS
         //╰──────────┴──────────┼──────────┼──────────┴──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                               &kp E    &kp ENTER 	  &ht INS SPACE &ht DEL BSPC
+                                               &kp E    &kp ENTER  &ht INS SPACE &ht DEL BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 		>;
 	};
 
         fnc_layer {
 		bindings = <
-       
-	    &kp LC(Z)       &kp LC(X)  &kp LC(C)	    &kp LC(V)      &kp LC(Y)		&kp F1 		 &kp F2        &kp F3 	    &kp F4   	  &kp F5
-       
-            &none           &none      &none                 &none         &kp CAPS             &kp F6           &kp F7        &kp F8       &kp F9        &kp F10      
-       
-           &kp K_VOL_DN     &kp K_VOL_UP    &kp K_MUTE      &kp PC_BRI_UP   &kp PC_BRI_DN        &kp F11        &none          &none        &none         &kp F12
-       
-                                                               &none         &kp  ENTER        &ht INS SPACE   &ht DEL BSPC                                               
-		>;
+        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│ INSERT   │  1       │  2       │  3       │          │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
+            &kp LC(Z)  &kp LC(X)   &kp LC(C)  &kp LC(V) &kp LC(Y)	&kp F1 	  &kp F2     &kp F3 	&kp F4     &kp F5
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ DELETE   │  4       │  5       │  6       │          │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
+            &kp DEL    &kp N4     &kp N5     &kp N6     &trans         &kp LARW   &kp DARW   &kp UARW   &kp RARW   &kp SEMI
+        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│ CAPS     │  7       │  8       │  9       │  0       │   │          │          │          │          │          │
+           &caps_word  &kp N7     &kp N8     &kp N9     &kp N0         &trans     &trans     &trans     &trans     &trans
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &kp ESC        &trans     &trans
+        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+            >;
         };
 
         nav_layer {
