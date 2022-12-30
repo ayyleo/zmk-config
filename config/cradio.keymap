@@ -62,22 +62,22 @@
 
     keymap {
         compatible = "zmk,keymap";
-        default_layer {
-            bindings = <
+	default_layer {
+    		bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  W       │  E       │  R       │  T       │   │  Y       │  U       │  I       │  O       │  P       │
-            &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
+        //│  J       │  C       │  Y       │  F       │  K       │   │  Z       │  L       │  , <     │  U       │  Q       │
+            &ht ESC J   &kp C      &kp Y      &kp F      &kp K          &kp Z      &kp L      &kp COMMA  &kp U      &kp Q
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  A       │  S       │  D       │  F       │  G       │   │  H       │  J       │  K       │  L       │ ' "      │
-            HRML(A,        S,         D,         F)     &kp G          &kp H      HRMR(J,        K,         L,        SQT)
+        //│  R       │  S       │  T       │  H       │  D       │   │  M       │  N       │  A       │  I       │   O      │
+            HRML(R,        S,         T,         H)     &kp D          &kp M      HRMR(N,        A,         I,          O)
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
-            &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 1 BSPC
+        //│ / ?      │  V       │  G       │  P       │  B       │   │  X       │  W       │ . >      │ ; :      │ - _      │
+            &kp FSLH     &kp V      &kp G      &kp P      &kp B          &kp X      &kp W      &kp DOT  &kp SEMI   &kp MINUS
+        //╰──────────┴──────────┼──────────┼──────────┴──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
+                                               &kp E    &kp ENTER 	  &ht INS SPACE &ht DEL BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-            >;
-        };
+		>;
+	};
 
         fnc_layer {
             bindings = <
