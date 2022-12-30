@@ -11,11 +11,9 @@
 // Layer definitions
     #define BASE 0
     #define NAV 1
-    #define EXT 2
-    #define FNC 3
-    #define SYM2 4
-    #define ACCENT 5
-	#define SETTINGS 6
+    #define FNC 2
+    #define GAME 3
+	#define SETTINGS 4
 // -----------------
 
 // Home row mods macro
@@ -64,11 +62,23 @@
             key-positions = <32 33>;
             bindings = <&mo ACCENT>;
         };
-				// internal-left & external-right thumb keys
-				combo_sym2 {
+				// LR Thumb Key & RR Thumb Key 
+				combo_nav {
 						timeout-ms = <200>;
 						key-positions = <31 33>;
-						bindings = <&mo SYM2>;
+						bindings = <&kt NAV>;
+				};
+				// LR Thumb Key & RL Thumb Key 
+				combo_fnc {
+						timeout-ms = <200>;
+						key-positions = <31 33>;
+						bindings = <&sl FNC>;
+				};
+				// RR Thumb Key & RR Thumb Key 
+				combo_game {
+						timeout-ms = <200>;
+						key-positions = <30 33>;
+						bindings = <&kt GAME>;
 				};
 				// both left thumb keys
 				combo_settings {
@@ -86,7 +96,7 @@
 		            bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│  J       │  C       │  Y       │  F       │  K       │   │  Z       │  L       │  , <     │  U       │  Q       │
-            &kp J      &kp C      &kp Y      &kp F      &kp K          &kp Z      &kp L      &kp COMMA  &kp U      &kp Q
+            &ht ESC J   &kp C      &kp Y      &kp F      &kp K          &kp Z      &kp L      &kp COMMA  &kp U      &kp Q
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  R       │  S       │  T       │  H       │  D       │   │  M       │  N       │  A       │  I       │   O      │
             HRML(R,        S,         T,         H)     &kp D          &kp M      HRMR(N,        A,         I,          O)
@@ -99,8 +109,26 @@
             >;
 		};
 
-        // Numbers and high frequency symbols
-       		nav_layer {
+        // Fnc and shortcuts, oneshot
+       		fnc_layer {
+		bindings = <
+        //╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮   ╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮
+        //│ undo          │ cut           │ copy          │ paste         │   redo        │   │  Fn1          │  Fn2          │  Fn3          │  Fn4          │  Fn5          │
+		   &kp LC(Z)       &kp LC(X)   		  &kp LC(C)	    &kp LC(V)      &kp LC(Y)		  		&kp F1 		    &kp F2  		   &kp F3 	    &kp F4   		  &kp F5
+        //├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤   ├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+        //│               │               │               │               │  caps lock    │   │  Fn6          │  Fn7          │  Fn8          │  Fn9          │ Fn10          │
+            HRML(none,      none,          none,             none)             &kp CAPS          &kp F6        HRMR(F7,        F8,                F9,           F10)      
+        //├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤   ├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+        //│               │               │               │               │               │   │  Fn11         │               │               │               │ Fn12          │
+           &kp K_VOL_DN     &kp K_VOL_UP    &kp K_MUTE      &kp PC_BRI_UP   &kp BC_BRI_DN        &kp F11        &none            &none            &none         &kp F12
+        //╰───────────────┴───────────────┼───────────────┼───────────────┴───────────────┤   ├───────────────┼───────────────┼───────────────┴───────────────┴───────────────╯
+                                                               &none         &kp  ENTER 		&ht INS SPACE   &ht DEL BSPC
+        //                                                ╰───────────────┴───────────────╯   ╰───────────────┴───────────────╯
+		>;
+		};
+
+        // Numbers and arrow keys, toggle
+		    nav_layer {
 		bindings = <
         //╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮   ╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮
         //│ 1 !           │ 2 @           │ 3 #           │ 4 $           │  5 %          │   │  6 ^          │  7 &          │  8 *          │  9 (          │  0 )          │
@@ -109,51 +137,29 @@
         //│  \ |          │  ` ~          │  ' "          │  { [          │  } ]          │   │  TAB          │  LEFT         │  UP           │  RIGHT        │print scrn     │
             HRML(BSLH,      GRAVE,          SQT,             LBKT)             &kp RBKT          &kp TAB        HRMR(LEFT,        UP,            RIGHT,           PSCRN      
         //├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤   ├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
-        //│               │               │               │               │               │   │               │               │               │               │               │
-           &kp K_VOL_DN     &kp K_VOL_UP    &kp K_MUTE      &kp PC_BRI_UP   &kp BC_BRI_DN        &kp K_CALC        &none            &none         &none         &none
+        //│               │               │               │               │               │   │               │               │   DOWN        │               │               │
+           &kp K_VOL_DN     &kp K_VOL_UP    &kp K_MUTE      &kp PC_BRI_UP   &kp BC_BRI_DN        &kp K_CALC        &none            &kp DOWN         &none         &none
         //╰───────────────┴───────────────┼───────────────┼───────────────┴───────────────┤   ├───────────────┼───────────────┼───────────────┴───────────────┴───────────────╯
                                                                &none         &kp  ENTER 		&ht INS SPACE   &ht DEL BSPC
         //                                                ╰───────────────┴───────────────╯   ╰───────────────┴───────────────╯
 		>;
 		};
 
-        // Main modifiers and arrow keys
-		    ext_layer {
+        // WASD 
+       		game_layer {
 		bindings = <
-		&kp N1 &kp N2    &kp N3   &kp N4   &kp N5		    	&kp N6    &kp N7     &kp N8   &kp N9    &kp N0
-		&sk LALT  &sk LGUI  &sk LSHIFT  &sk LCTRL  &kp RALT     		&kp ESC      &kp LEFT &kp UP    &kp RIGHT &none
-		&kp LC(Z) &kp LC(X) &kp LC(C)   &kp LC(V)  &kp TAB				&kp LC(BSPC) &kp BSPC &kp DOWN  &kp DEL   &kp CAPS 
-											&trans &kp LCTRL			&kp ENTER  &mo FNC
-		>;
-		};
-
-        // Function keys with modifiers
-       		fnc_layer {
-		bindings = <
-		&kp F1   &kp F2   &kp F3     &kp F4     &kp F5		            &kp F6        &kp F7   &kp F8          &kp F9 &kp F10
-		&sk LALT &sk LGUI &sk LSHIFT &sk LCTRL  &kp RALT                &kp F11       &kp F12  &kp PRINTSCREEN &none &none
-		&none    &none    &none      &bt BT_CLR &bt BT_SEL 0			&bt BT_SEL 1  &none    &none           &none  &bootloader
-          				           			&sl SYM2 &none				&none &none  
-		>;
-		};
-
-        // Low frequency symbols.
-       		symbols_2_layer {
-		bindings = <
-		&kp K_MUTE &kp K_VOL_DN &kp K_VOL_UP &kp C_BRI_DN &kp C_BRI_UP	  		&kp K_CALC &none  &none  &none  &none    
-		&none      &none        &none        &none        &none 	      		&none      &none  &none  &none  &none  
-		&none      &none        &none        &none        &none	                &none      &none  &none  &none  &none  
-           				           						  &none &none       	&none &none 
-		>;
-		};
-
-        // Used to type regional accents.
-       		accent_layer {
-		bindings = <
-		&none &none &none &none  &none                         &none &none &none &none &none 
-		&none &none &none &none  &none                         &none &none &none &none &none 
-		&none &none &none &none  &none                         &none &none &none &none &none 
-          				     &none &none                         &none &none 
+        //╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮   ╭───────────────┬───────────────┬───────────────┬───────────────┬───────────────╮
+        //│ ESC           │ Q             │ W             │ E             │  R            │   │               │               │               │               │               │
+		   &kp ESC         &kp Q   		  &kp W 		    &kp E            &kp R		  		  &kp none        &none            &none            &none         &none
+        //├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤   ├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+        //│  RSHFT        │  A            │  S            │  D            │   F           │                   │               │               │               │               │
+            &kp RSHFT        &kp A            &kp S            &kp   D       &kp F              &kp none        &none            &none            &none         &none
+        //├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤   ├───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+        //│   LCTRL       │  Z            │   X           │  C            │  V            │   │               │               │               │               │               │
+           &kp LCTRL         &kp z                &kp x      &kp c           &kp v              &kp none        &none            &none            &none         &none
+        //╰───────────────┴───────────────┼───────────────┼───────────────┴───────────────┤   ├───────────────┼───────────────┼───────────────┴───────────────┴───────────────╯
+                                                               &none         &kp  SPACE 		&none           &none
+        //                                                ╰───────────────┴───────────────╯   ╰───────────────┴───────────────╯
 		>;
 		};
 
